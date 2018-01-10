@@ -17,7 +17,7 @@ import moment from 'moment';
 import AddSvg from '../../../assets/icons/Add.svg';
 import EditSvg from '../../../assets/icons/Edit.svg';
 import EnableSvg from '../../../assets/icons/Enable.svg';
-import DisableSvg from '../../../assets/icons/Disable.svg';
+import DisableSvg from '../../../assets/icons/DisableRule.svg';
 import ChangestatusSvg from '../../../assets/icons/Change_status.svg';
 
 class RulesAndActionsPage extends Component {

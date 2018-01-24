@@ -253,7 +253,8 @@ class MaintenancePage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { devices } = nextProps;
+    const { devices, params } = nextProps;
+    if (!params.id && !params.JobId) this.setState({ contextBtns: true });
     if (devices && devices.Items.length && !_.isEqual(devices, this.props.devices)) {
       const deviceIds = devices.Items.map(({Id}) => Id);
       this.props.actions.loadMaintenanceData({
@@ -327,7 +328,8 @@ class MaintenancePage extends Component {
       onDeviceGridReady: this.onDeviceGridReady,
       onAlarmGridReady: this.onAlarmGridReady,
       onRuleGridReady: this.onRuleGridReady,
-      onContextMenuChange: this.onContextMenuChange
+      onContextMenuChange: this.onContextMenuChange,
+      onDeviceJobSoftSelectChange : this.onDeviceJobSoftSelectChange
     };
   };
 
@@ -372,12 +374,16 @@ class MaintenancePage extends Component {
     return (
       <PageContainer>
         <TopNav breadcrumbs={breadcrumbs} projectName={lang.AZUREPROJECTNAME} />
-        <ContextFilters disableDeviceFilter={(this.props.params || {}).id !== undefined}>
+        <ContextFilters disableDeviceFilter={((this.props.params || {}).id || (this.props.params || {}).JobId) !== undefined}>
           <div className="timerange-selection" onClick={this.props.actions.hideFlyout}>
             <span className="last-refreshed-text"> {`${lang.LAST_REFRESHED} | `} </span>
-            <div className="last-refreshed-time">
-              {moment(this.state.lastRefreshed).format("h:mm:ss M/D/YY")}
-            </div>
+            {
+              moment.locale() === 'en'
+              ? <div className="last-refreshed-time">
+                 {moment(this.state.lastRefreshed).format("h:mm:ss M/D/YY")}
+                </div>
+              : <div className="last-refreshed-time">{this.state.lastRefreshed.toLocaleString()}</div>
+            }
             <div onClick={this.refreshData} className="refresh-icon icon-sm" />
             <div className="time-icon icon-sm" />
             <Select

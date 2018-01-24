@@ -17,6 +17,7 @@ import PcsBtn from '../../shared/pcsBtn/pcsBtn';
 import ManageFilterBtn from '../../shared/contextBtns/manageFiltersBtn';
 import SimControlCenter from '../../simControlCenter/simControlCenter';
 import moment from 'moment';
+import Config from '../../../common/config';
 
 import AddSvg from '../../../assets/icons/Add.svg';
 import './devices.css';
@@ -28,7 +29,7 @@ class DevicesPage extends Component {
     this.state = {
       softSelectedDeviceId: '',
       lastRefreshed: new Date(),
-      rowData: this.props.devices,
+      rowData: this.filterDevices(this.props.devices),
       contextBtns: ''
     };
     this.refreshData = this.refreshData.bind(this);
@@ -38,7 +39,7 @@ class DevicesPage extends Component {
     this.setState({ lastRefreshed: new Date(), rowData: undefined }, () => { this.props.actions.loadDevices(true); });
   }
 
-  componentWillReceiveProps(nextProps) { this.setState({ rowData: nextProps.devices }); }
+  componentWillReceiveProps(nextProps) { this.setState({ rowData: this.filterDevices(nextProps.devices) }); }
 
   componentDidMount() { this.props.actions.showingDevicesPage(); }
 
@@ -54,6 +55,18 @@ class DevicesPage extends Component {
 
   /** Listen for changes in the dynamic context filters and update accordingly */
   onContextMenuChange = contextBtns => this.setState({ contextBtns });
+
+  filterDevices(devices) {
+    if (!devices || !devices.Items) return devices;
+    const status = (this.props.params || {}).status || '';
+    const isConnected = status.toLowerCase() === 'connected';
+    return {
+      Items: devices.Items.filter((device) => {
+        if (!status) return true;
+        return device.Connected === isConnected;
+      })
+    };
+  }
 
   render() {
     // Extract the devices from the props
@@ -82,12 +95,21 @@ class DevicesPage extends Component {
         <PageContent className="devices-grid-container">
           <div className="timerange-selection">
             <span className="last-refreshed-text">{`${lang.LAST_REFRESHED} | `}</span>
-            <div className="last-refreshed-time">
-              {moment(this.state.lastRefreshed).format("h:mm:ss M/D/YY")}
-            </div>
+            {
+              moment.locale() === 'en'
+              ? <div className="last-refreshed-time">
+                  {moment(this.state.lastRefreshed).format("h:mm:ss M/D/YY")}
+                </div>
+              : <div className="last-refreshed-time">{this.state.lastRefreshed.toLocaleString()}</div>
+            }
             <div onClick={this.refreshData} className="refresh-icon icon-sm" />
           </div>
-          <DevicesGrid {...deviceGridProps} />
+          {
+            devices && devices.length === 0
+            ? <div className="no-results">{lang.NO_RESULTS_FOUND}</div>
+            : <DevicesGrid {...deviceGridProps}
+                pagination={(devices|| []).length > Config.DEVICES_RULESGRID_ROWS ? true :  false}/>
+          }
         </PageContent>
       </PageContainer>
     );

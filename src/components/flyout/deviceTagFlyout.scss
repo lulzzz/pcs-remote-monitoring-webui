@@ -154,7 +154,6 @@
   .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 20px;
 
     .pcs-btn {
       height: 30px;
@@ -181,6 +180,17 @@
 
       &:focus { border: 1px solid $lightestGray; }
     }
+  }
+
+  input {
+    font-size: 12px;
+    font-weight: normal;
+    margin-top: 2px;
+    padding-left: 15px;
+
+    &:hover,
+    &:active,
+    &:focus { border: 1px solid $lightestGray !important; }
   }
 
   .device-tag-type {

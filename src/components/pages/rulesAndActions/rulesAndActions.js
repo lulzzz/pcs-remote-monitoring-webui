@@ -239,7 +239,7 @@ class RulesAndActionsPage extends Component {
             {
               moment.locale() === 'en'
               ? <div className="last-refreshed-time">
-                  {moment(this.state.lastRefreshed).format("h:mm:ss M/D/YY")}
+                  {moment(this.state.lastRefreshed).format("h:mm:ss A, M/D/YY")}
                 </div>
               : <div className="last-refreshed-time">{this.state.lastRefreshed.toLocaleString()}</div>
             }

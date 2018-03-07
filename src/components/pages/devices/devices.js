@@ -5,6 +5,9 @@ import DeviceGrid from './devicesGrid/devicesGrid';
 import { Btn, RefreshBar } from 'components/shared';
 import { DeviceDetails } from './flyouts';
 import './devices.css';
+import { DevicesDetailSection } from 'components/pages/devices/devicesDetail/deviceDetailSection';
+import { SimpleNameValueDisplay } from 'components/pages/devices/devicesDetail/simpleNameValueDisplay';
+import { SimpleListDisplay } from 'components/pages/devices/devicesDetail/simpleListDisplay';
 
 const closedFlyoutState = {
   flyoutOpen: false,
@@ -12,6 +15,13 @@ const closedFlyoutState = {
 };
 
 export class Devices extends Component {
+  constructor(props) {
+    super(props);
+    if (this.props.devices)
+    {
+      this.state = { currentSelectedDevice: this.props.devices[0] };
+    }
+  }
 
   constructor(props) {
     super(props);
@@ -26,7 +36,7 @@ export class Devices extends Component {
   }
 
   changeDeviceGroup = () => {
-    const { changeDeviceGroup, deviceGroups }  = this.props;
+    const { changeDeviceGroup, deviceGroups } = this.props;
     changeDeviceGroup(deviceGroups[1].id);
   }
 
@@ -53,7 +63,7 @@ export class Devices extends Component {
         {
           !!error &&
           <span className="status">
-            { t('errorFormat', { message: t(error.message, { message: error.errorMessage }) }) }
+            {t('errorFormat', { message: t(error.message, { message: error.errorMessage }) })}
           </span>
         }
         { !error && <DeviceGrid {...gridProps} /> }

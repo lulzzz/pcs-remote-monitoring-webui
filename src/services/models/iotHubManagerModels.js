@@ -13,12 +13,15 @@ export const toDeviceModel = (device = {}) => reshape(device, {
   'lastActivity': 'lastActivity',
   'connected': 'connected',
   'isSimulated': 'isSimulated',
-  'properties.reported.type': 'type',
   'properties.reported.firmware': 'firmware',
+  'properties.reported.supportedMethods': 'methods',
   'properties.reported.telemetry': 'telemetry',
+  'properties.reported.type': 'type',
+  'properties.reported': 'properties',
   'c2DMessageCount': 'c2DMessageCount',
   'enabled': 'enabled',
   'lastStatusUpdated': 'lastStatusUpdated',
   'iotHubHostName': 'iotHubHostName',
-  'eTag': 'eTag'
+  'eTag': 'eTag',
+  'tags': 'tags'
 });

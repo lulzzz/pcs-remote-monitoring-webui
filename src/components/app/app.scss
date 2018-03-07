@@ -11,7 +11,8 @@
 
   // Apply theme properties
   @include themify($themes) {
-    background-color: themed('colorLowestFirst');
+    color: themed('colorContentText');
+    background-color: themed('colorContentBackground');
 
     // Style text highlights
     // Set RGBa opacity to .99 to get correct color in the selection styling

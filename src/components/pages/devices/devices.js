@@ -5,9 +5,7 @@ import DeviceGrid from './devicesGrid/devicesGrid';
 import { Btn, RefreshBar } from 'components/shared';
 import { DeviceDetails } from './flyouts';
 import './devices.css';
-import { DevicesDetailSection } from 'components/pages/devices/devicesDetail/deviceDetailSection';
-import { SimpleNameValueDisplay } from 'components/pages/devices/devicesDetail/simpleNameValueDisplay';
-import { SimpleListDisplay } from 'components/pages/devices/devicesDetail/simpleListDisplay';
+import { DeviceDetailsTemp } from 'components/pages/devices/flyouts/deviceDetails/deviceDetailsTemp';
 
 const closedFlyoutState = {
   flyoutOpen: false,
@@ -17,8 +15,7 @@ const closedFlyoutState = {
 export class Devices extends Component {
   constructor(props) {
     super(props);
-    if (this.props.devices)
-    {
+    if (this.props.devices) {
       this.state = { currentSelectedDevice: this.props.devices[0] };
     }
   }

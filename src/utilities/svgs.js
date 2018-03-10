@@ -4,6 +4,12 @@ import CaratIconPath from 'assets/icons/carat.svg';
 import ColonIconPath from 'assets/icons/colon.svg';
 import ContosoIconPath from 'assets/icons/contoso.svg';
 import CriticalIconPath from 'assets/icons/critical.svg';
+import DeviceChillerIconPath from 'assets/icons/deviceChiller.svg';
+import DeviceDefaultIconPath from 'assets/icons/deviceIcon.svg';
+import DeviceElevatorIconPath from 'assets/icons/deviceElevator.svg';
+import DeviceEngineIconPath from 'assets/icons/deviceEngine.svg';
+import DevicePrototypingIconPath from 'assets/icons/devicePrototyping.svg';
+import DeviceTruckIconPath from 'assets/icons/deviceTruck.svg';
 import DisabledIconPath from 'assets/icons/disabled.svg';
 import ErrorIconPath from 'assets/icons/errorAsterisk.svg';
 import HamburgerIconPath from 'assets/icons/hamburger.svg';
@@ -34,6 +40,14 @@ export const svgs = {
     devices: TabDevicesIconPath,
     maintenance: TabMaintenanceIconPath,
     rules: TabRulesIconPath
+  },
+  devices: {
+    default: DeviceDefaultIconPath,
+    chiller: DeviceChillerIconPath,
+    elevator: DeviceElevatorIconPath,
+    engine: DeviceEngineIconPath,
+    prototyping: DevicePrototypingIconPath,
+    truck: DeviceTruckIconPath
   },
   carat: CaratIconPath,
   colon: ColonIconPath,
